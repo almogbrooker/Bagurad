@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
-import 'package:baguard_full/body/ble_body.dart';
+import 'package:baguard_full/ble_body.dart';
 
 class bodyList extends StatefulWidget {
   List<BluetoothDevice> devices;
