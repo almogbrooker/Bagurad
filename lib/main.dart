@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 import 'Appbar/appbar.dart';
 import 'BlueTooth/search_device.dart';
-import 'body/body.dart';
+import 'body.dart';
 
 void main() {
   runApp(MyApp());
