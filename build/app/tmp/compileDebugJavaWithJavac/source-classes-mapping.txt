@@ -1,0 +1,4 @@
+com/example/baguard_full/BuildConfig.java
+ com.example.baguard_full.BuildConfig
+io/flutter/plugins/GeneratedPluginRegistrant.java
+ io.flutter.plugins.GeneratedPluginRegistrant

@@ -1,0 +1,13 @@
+/home/almog/Android/baguard_full/build/linux/x64/debug/bundle/baguard_full
+/home/almog/Android/baguard_full/build/linux/x64/debug/bundle/data/icudtl.dat
+/home/almog/Android/baguard_full/build/linux/x64/debug/bundle/lib/libflutter_linux_gtk.so
+/home/almog/Android/baguard_full/build/linux/x64/debug/bundle/data/flutter_assets/assets/icon/AppBarLogo.png
+/home/almog/Android/baguard_full/build/linux/x64/debug/bundle/data/flutter_assets/assets/icon/icon_1.png
+/home/almog/Android/baguard_full/build/linux/x64/debug/bundle/data/flutter_assets/assets/icon/icon.png
+/home/almog/Android/baguard_full/build/linux/x64/debug/bundle/data/flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf
+/home/almog/Android/baguard_full/build/linux/x64/debug/bundle/data/flutter_assets/AssetManifest.json
+/home/almog/Android/baguard_full/build/linux/x64/debug/bundle/data/flutter_assets/NOTICES
+/home/almog/Android/baguard_full/build/linux/x64/debug/bundle/data/flutter_assets/kernel_blob.bin
+/home/almog/Android/baguard_full/build/linux/x64/debug/bundle/data/flutter_assets/fonts/MaterialIcons-Regular.otf
+/home/almog/Android/baguard_full/build/linux/x64/debug/bundle/data/flutter_assets/FontManifest.json
+/home/almog/Android/baguard_full/build/linux/x64/debug/bundle/data/flutter_assets/version.json
