@@ -81,11 +81,12 @@ class _CreatBoxForDeviceState extends State<CreatBoxForDevice> {
   void initState() {
     _checkState();
     Timer.periodic(Duration(milliseconds: 500), (timer) {
-      widget.device.readRssi().then((value) {
-        _avgRssi = ((-_rssi + value) / 2).round();
+      //widget.device.readRssi().then((value) {
+        //_avgRssi = ((-_rssi + value) / 2).round();
+        _avgRssi = _rssi;
         dis = double.parse(
             (pow(10, ((-61 - (_avgRssi)) / 20)).toStringAsFixed(1)));
-      });
+     // });
     });
 
     // TODO: implement initState
