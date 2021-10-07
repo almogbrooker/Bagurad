@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1003346172960",
+    "project_id": "baguard-50465",
+    "storage_bucket": "baguard-50465.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1003346172960:android:e7f2fc809062958979b045",
+        "android_client_info": {
+          "package_name": "com.qpower.baguard"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1003346172960-5hhq59o44ejqrd87t3a4ao30beerkot4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC0pcFY6Ty5GjvxPEATmbF_z70jwUINUmw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1003346172960-5hhq59o44ejqrd87t3a4ao30beerkot4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
