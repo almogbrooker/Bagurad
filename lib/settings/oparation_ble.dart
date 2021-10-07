@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import './about.dart';
-
+import 'package:flutter_blue/flutter_blue.dart';
+import 'package:animated_button_bar/animated_button_bar.dart';
+import 'package:baguard_full/body/ble_body.dart';
 class BuildOperation extends StatefulWidget {
-  const BuildOperation({Key? key}) : super(key: key);
+  final BluetoothDevice device;
+  const BuildOperation(
+    this.device, {
+    Key? key,
+  }) : super(key: key);
 
   @override
   _StateBuildOperation createState() => _StateBuildOperation();
@@ -15,6 +20,8 @@ class _StateBuildOperation extends State<BuildOperation> {
   double slidevalue2 = 4;
   String status1 = 'Medium';
   String status2 = 'Medium';
+  bool changeConnection = true;
+
   onChangeFunction(bool newValue) {
     setState(() {
       valNotify = newValue;
@@ -50,68 +57,51 @@ class _StateBuildOperation extends State<BuildOperation> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(10),
-      child: ListView(
-        children: <Widget>[
-          SizedBox(
-            height: 40,
-          ),
-          Row(
-            children: [
-              Column(
-                children: [
-                  Icon(
-                    Icons.data_saver_off_rounded,
-                    color: Colors.cyan,
-                  ),
-                  SizedBox(
-                    width: 30,
-                  ),
-                ],
-              ),
-              Text(
-                'Operation mode',
-                style: TextStyle(
-                  color: Colors.cyan,
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ],
-          ),
-          Divider(
-            height: 10,
-            thickness: 2,
-            endIndent: 10,
-            color: Colors.black12,
-          ),
-          SizedBox(
-            height: 2,
-          ),
-          buildNotifyOptionSw(
-            Icons.notification_important, // Icon you want
-            'Alerts', // title for the row
-            'Enable theft alert', // subtitle
-            valNotify, // switch or slide animation
-            onChangeFunction, // function setState
-          ),
-          buildNotifyOptionSl(
-            Icons.radar, // Icon you want
-            'Movment Sensitivity', // title for the row
-            "$status1($slidevalue1\m)", // subtitle
-            slidevalue1, // switch or slide animation
-            onChangeFunctionSlide1,
-          ),
-          buildNotifyOptionSl(
-            Icons.radar, // Icon you want
-            'Movment Sensitivity', // title for the row
-            "$status2($slidevalue2\m)", // subtitle
-            slidevalue2, // switch or slide animation
-            onChangeFunctionSlide2,
-          ),
-          AboutSetting(),
-        ],
-      ),
+      child: Column(children: [
+        buildNotifyOptionSw(
+          Icons.notification_important, // Icon you want
+          'Alert', // title for the row
+          'Enable theft alert', // subtitle
+          valNotify, // switch or slide animation
+          onChangeFunction, // function setState
+        ),
+        buildNotifyOptionSl(
+          Icons.radar, // Icon you want
+          'Movment Sensitivity', // title for the row
+          "$status2($slidevalue2\m)", // subtitle
+          slidevalue2, // switch or slide animation
+          onChangeFunctionSlide2,
+        ),
+        AnimatedButtonBar(
+          radius: 20.0,
+          padding: const EdgeInsets.all(16.0),
+          backgroundColor: Colors.white,
+          foregroundColor: changeConnection ? Colors.green : Colors.red,
+          elevation: 20,
+          borderColor: Colors.white24,
+          borderWidth: 2,
+          innerVerticalPadding: 10,
+          children: [
+            ButtonBarEntry(
+                onTap: () async {
+                  setState(() {
+                    changeConnection = true;
+                  });
+                  widget.device.connect();
+                  CreatBoxForDevice(widget.device);
+                },
+                child: Text('Connect')),
+            ButtonBarEntry(
+                onTap: () {
+                  widget.device.disconnect();
+                  setState(() {
+                    changeConnection = false;
+                  });
+                },
+                child: Text('Disconnect')),
+          ],
+        ),
+      ]),
     );
   }
 }
@@ -129,7 +119,7 @@ Padding buildNotifyOptionSw(IconData icon, String title, String subtitle,
               Icon(
                 icon,
                 color: value != true ? Colors.grey : Colors.green,
-                size: 35,
+                size: 25,
               ),
               SizedBox(
                 width: 10,
@@ -181,7 +171,7 @@ Padding buildNotifyOptionSl(IconData icon, String title, String subtitle,
                 size: 20,
               ),
               SizedBox(
-                width: 10,
+                width: 15,
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -202,7 +192,7 @@ Padding buildNotifyOptionSl(IconData icon, String title, String subtitle,
           ),
         ),
         Transform.scale(
-            scale: 0.2,
+            scale: 1,
             child: Slider.adaptive(
                 value: value,
                 min: 2,

@@ -1,14 +1,18 @@
 import 'dart:async';
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:baguard_full/body/body.dart';
 //import 'package:flutter_blue/gen/flutterblue.pb.dart' as protos;
 
 //import 'package:flutter_blue/gen/flutterblue.pb.dart';
 class BluethootDeviceLowPower extends StatefulWidget {
-  final Function devicesList;
-  const BluethootDeviceLowPower(this.devicesList);
-  @override
+  //final Function connectStatus;
+
+  const BluethootDeviceLowPower({
+    Key? key,
+    //required this.connectStatus,
+  }) : super(key: key);
   _StateBluethootDeviceLowPower createState() =>
       _StateBluethootDeviceLowPower();
 }
@@ -20,13 +24,13 @@ class _StateBluethootDeviceLowPower extends State<BluethootDeviceLowPower>
   late BluetoothDevice device;
   var scanSubscription;
   FlutterBlue bluetoothInstance = FlutterBlue.instance;
-
   bool endSearch = false;
-  late AnimationController _animationController;
-  late Animation _colorAnimation;
+  late SharedPreferences prefs;
 
   scanForDevice() async {
-    bluetoothInstance.startScan(timeout: Duration(seconds: 5));
+    bluetoothInstance
+        .startScan(timeout: Duration(seconds: 5))
+        .then((value) => endSearch = true);
 
     scanSubscription = bluetoothInstance.scanResults.listen((scanResult) {
       for (ScanResult r in scanResult) {
@@ -48,18 +52,14 @@ class _StateBluethootDeviceLowPower extends State<BluethootDeviceLowPower>
 
   connectToDevice(BluetoothDevice device) async {
     //flutter_blue makes our life easier
-
-    await device.connect().onError((error, stackTrace) {
-      device.disconnect();
-      //widget.devicesList(device, false);
-    }).then((value) => widget.devicesList(device, true));
-    //After connenullction start dicovering services
+    await device.connect().onError((error, stackTrace) => 
+    device.disconnect());
+    
   }
 
   @override
   void initState() {
     super.initState();
-
     if (devices.isNotEmpty) {
       devices.clear();
     }
@@ -97,17 +97,6 @@ class _StateBluethootDeviceLowPower extends State<BluethootDeviceLowPower>
                     )
                   : Text(''),
             ),
-            endSearch
-                ? ElevatedButton(
-                    onPressed: () {
-                      scanForDevice();
-                      setState(() {
-                        endSearch = false;
-                      });
-                    },
-                    child: Text('Try again'),
-                  )
-                : Text(''),
             Expanded(
               child: ListView.builder(
                 itemCount: devices.length,
@@ -139,6 +128,17 @@ class _StateBluethootDeviceLowPower extends State<BluethootDeviceLowPower>
                 },
               ),
             ),
+            endSearch
+                ? ElevatedButton(
+                    onPressed: () {
+                      scanForDevice();
+                      setState(() {
+                        endSearch = false;
+                      });
+                    },
+                    child: Text('Try again'),
+                  )
+                : Text(''),
           ],
         ));
   }
