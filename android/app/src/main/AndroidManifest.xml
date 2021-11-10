@@ -1,13 +1,15 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.baguard_full">
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    
+    package="com.qpowerai.qpower_baguard">
+   <uses-permission android:name="android.permission.BLUETOOTH" />  
+	 <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />  
+	 <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>  
+
    <application
         android:label="Baguard"
         android:icon="@mipmap/ic_launcher">
-        <service android:name="com.pravera.flutter_foreground_task.service.ForegroundService" />
         <activity
+            android:showWhenLocked="true"
+            android:turnScreenOn="true"
             android:name=".MainActivity"
             android:launchMode="singleTop"
             android:theme="@style/LaunchTheme"
